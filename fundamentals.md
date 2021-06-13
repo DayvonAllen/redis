@@ -16,4 +16,5 @@
 - Redis is written in ANSI C.
 - It's supported in most programming languages.
 - It works only on Linux and Mac.
+- The maximum allowed key size in Redis is 512 MB.
 ---

@@ -61,3 +61,17 @@
 - Ex. `shutdown save`
 - Ex. `shutdown nosave`
 ---
+
+## Redis Dump and Restore Commands
+- The dump command serializes the value stored in a key in a redis specific format that we can't read. It will use that serialized data to back up your data.
+- This dump command is used to create a backup for data stored in your keys.
+- If you use the dump command you can restore data at any point.
+- A redis value encoded by a specific redis version cannot be decoded by another redis version.
+- `dump <key>` - will return a serialized value in the terminal.
+  - Ex. `dump name`
+  - After dumping you can restore the data
+  - `restore <key> <ttl(when the key should expire)> <serialized value from the dump command>`
+    - Ex. `restore name 0 "\x00\x04John\t\x00\x83\x1a\xe6\x95\x95\r\x17\xa9"` - will look something like this, if you put `0` for `ttl` the key will not expire.
+    - `restore` only works if the target key is already deleted.
+    - If you would like to replace the key in your DB use the `REPLACE` option:
+      - `restore name 0 "\x00\x04John\t\x00\x83\x1a\xe6\x95\x95\r\x17\xa9" REPLACE` - is will replace the key if it is not deleted from your DB.
