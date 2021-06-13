@@ -1,0 +1,25 @@
+## String Datatype And Commands
+- `append <key> <value>` - will append to the end of the string
+  - Ex. `append name hello` - will append and return the new length of the string.
+- `incr <key>` - increments the key's value by 1 of the value can be represented as an integer.
+- `incrby <key> <value>` - increment's the key's value by the specified value.
+  - `incrby score 5` - increments by 5.
+- `decr <key>` - decrements value by 1
+- `decrby <key> <value>` - decrement's the key's value by the specified value.
+- `incrbyfloat <key> <value>` - let's you increment a float by a specified float value.
+- `getset <key> <value>` - It returns the previous value of that key to the terminal and then sets the value to your specified value.
+- `mset [key,value...]` - allows you to set the values of multiple keys at the same time.
+  - Ex. `mset name John age 25`
+- `mget <[key...]>` - allows you to retrieve values from multiple keys
+  - Ex. `mget name age`
+- `msetnx [key,value...]` - It will only set values if the key does not exists. It returns the number of successful operations. If the last argument exists in the DB then none of the previous arguments will be set in the database.
+- `getrange` extracts a substring from a string.
+  - `getrange <key> <start> <end>` - get range is inclusive, so the 'end' index is included in the substring
+    - Ex. `getrange name 0 2` - gets index 0,1 and 2. 
+    - If the 'end' index is -1, that is the last character in the string. -2 is the second to last character in your string.
+- `setex <key> <expiration> <value>` - sets a key's value with an expiration in seconds.
+- `psetex <key> <expiration> <value>` - sets a key's value with an expiration in milliseconds. 
+- `setrange <key> <offset> <value>` - allows you to overwrite part of a string.
+  - `setrange name 3 world` - replaces everything from the 3 index and beyond to world.
+- `strlen <key>` - returns the key's value's length.
+---

@@ -1,0 +1,15 @@
+## Redis KEYS Command
+- In Redis if you use the KEYS command, you can return all the keys that match a pattern.
+- Supported glob-style patterns:
+  - `h?llo`, this matches hello, hallo and hxllo. `?` means any one character can be inserted there. The length of the key must be equal to `h?llo`, length is 5.
+  - `h*llo`, this matches hllo, heeeello. Any number of characters(even no character) can be placed between 'h' and 'llo'. The length of the key can be greater or equal to `hllo`, the length is 4.
+  - `h[ae]llo`, this matches hello and hallo, but not hillo. Either 'e' or 'a' can be inserted between 'h' and 'llo'. The length of the key must be equal to `h[ae]llo`, length is 5.
+  - `h[^e]llo`, this matches hallo, hbllo but not hello. This means anything but 'e' can be inserted between 'h' and 'llo'. The length of the key must be equal to `h[^e]llo`, length is 5.
+  - `h[a-b]llo`, this matches hallo and hbllo. This means any letters between 'a' and 'b' can be inserted between 'h' and 'llo'. The length of the key must be equal to `h[a-b]llo`, length is 5.
+- `keys <pattern>`
+  - Ex. `keys name?`
+  - Ex. `keys ?????` - will return any key that is 5 characters long.
+  - Ex. `keys n*me`
+  - Ex. `keys n[ae]me`
+  - Ex. `keys *` - gets all the keys stored in our database.
+---

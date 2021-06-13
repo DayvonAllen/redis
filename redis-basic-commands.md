@@ -1,7 +1,10 @@
 ## Redis Basic Commands
 - `docker exec -it <redis container name> redis-cli` allows for you to interact with redis.
 - `set <key> <value> [optional parameters]` store a key value pair into redis. If a value is already set then it will be overwritten.
-  - Ex. `set word "hello"` stores 'word' as the key and "hello" as the value.
+  - Ex. `set word "hello"` stores 'word' as the key and "hello" as the value. You don't need to use double quotes to specify a string in redis.
+  - Ex. `set word hello nx`, it will set the value 'hello' to the key 'word' if the key word doesn't exist.
+  - Ex. `set word hello xx`, it will set the value 'hello' to the key 'word' if the key word only if it already exists in the DB. 
+
 - `get <key>` gets a value by key from redis.
   - Ex. `get word` - returns the value
 - `del <key1> <key2>` - deletes key value pairs by key. You can delete 1 or multiple keys.
@@ -39,22 +42,6 @@
 - `type name` - will return the data type.
 ---
 
-## Redis KEYS Command
-- In Redis if you use the KEYS command, you can return all the keys that match a pattern.
-- Supported glob-style patterns:
-  - `h?llo`, this matches hello, hallo and hxllo. `?` means any one character can be inserted there. The length of the key must be equal to `h?llo`, length is 5.
-  - `h*llo`, this matches hllo, heeeello. Any number of characters(even no character) can be placed between 'h' and 'llo'. The length of the key can be greater or equal to `hllo`, the length is 4.
-  - `h[ae]llo`, this matches hello and hallo, but not hillo. Either 'e' or 'a' can be inserted between 'h' and 'llo'. The length of the key must be equal to `h[ae]llo`, length is 5.
-  - `h[^e]llo`, this matches hallo, hbllo but not hello. This means anything but 'e' can be inserted between 'h' and 'llo'. The length of the key must be equal to `h[^e]llo`, length is 5.
-  - `h[a-b]llo`, this matches hallo and hbllo. This means any letters between 'a' and 'b' can be inserted between 'h' and 'llo'. The length of the key must be equal to `h[a-b]llo`, length is 5.
-- `keys <pattern>`
-  - Ex. `keys name?`
-  - Ex. `keys ?????` - will return any key that is 5 characters long.
-  - Ex. `keys n*me`
-  - Ex. `keys n[ae]me`
-  - Ex. `keys *` - gets all the keys stored in our database.
----
-
 ## Redis Shutdown Command
 - Shutdowns down redis server.
 - `shutdown options[NOSAVE|SAVE]` - if you save your data will be stored on the disk if you choose not to save then it won't be saved onto the disk.
@@ -75,3 +62,4 @@
     - `restore` only works if the target key is already deleted.
     - If you would like to replace the key in your DB use the `REPLACE` option:
       - `restore name 0 "\x00\x04John\t\x00\x83\x1a\xe6\x95\x95\r\x17\xa9" REPLACE` - is will replace the key if it is not deleted from your DB.
+---

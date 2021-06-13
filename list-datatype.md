@@ -1,0 +1,20 @@
+## List Datatype And Commands
+- Redis lists are implemented via Linked Lists.
+- Accessing an element by index is very fast in lists implemented via arrays and not so fast in list implemented vis linked lists.
+- `lpush <key> <[values...]>` - insert an element from the left. If you use lpush then the last element pushed will always be at the beginning(head) like `unshift()` in JavaScript.
+  - `lpush names john sally harold`
+- `lrange <key> <start> <stop>` - prints the values of a list based on start and stop values
+  - Ex. `lrange names 0 2` - prints the 0,1 and 2 index. -1 is the last element, if you want to get everything use `lrange names 0 -1`
+- `rpush <key> <[values...]>` - the opposite of `lpush`, the last value pushed will always be at the end(tail), like `push()` in JavaScript.
+- `rpushx <key> <value>` - you can only insert the value if the key exists.
+- `lpushx <key> <value>` - you can only insert the value if the key exists.
+- `rpop <key>` - will delete the tail element(the last value in your list) and return the element.
+  - Ex. `rpop names`
+- `lpop <key>` - will delete the head element(the first element in the linked list) and return it.
+- `ltrim <key> <start> <stop>` - It will delete everything in the list that is not specified in the 'start' and 'stop' range.
+  - Ex. `ltrim numbers 0 2` - If numbers contained `[0, 1, 2, 3, 4, 5]` it will turn into `[0, 1, 2]`
+- `lset <key> <index> <value>` - it will set the element at a specified index.
+  - Ex. `lset names 0 Harry`
+- `lindex <key> <index>` - it returns the value at a specified index location
+  - Ex. `lindex names 0`
+---
