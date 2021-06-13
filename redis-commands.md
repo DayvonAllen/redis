@@ -25,19 +25,39 @@
     - Ex. `pexpire name 10000`
   3. Remove expiration from a key `persist <key>`, this will get rid of an expiration on a key
     - Ex. `persist name`
+- `Randomkey` - gives you a random key from the DB.
+- `Rename <key> <newKey>` - renames key. Doesn't check if no key name already exists in the DB.
+  - Ex. `Rename name friend`
+  - If you rename a key to one that exists in the DB, then you will overwrite the value for that key.
+- `renamenx <key> <newKey>` - renames the key if the new key name doesn't exists in the DB. If the new key name exists, then redis will return `0` and not overwrite the value and will not delete the previous key that we are trying to rename. `nx` means not exists.
+  - `renamenx name friend` - if the friend key already exists then redis will just print `0` and not overwrite. If friend does not exists then redis will return `1` which means that it renamed `name` to `friend` successfully.
+- `touch <key or [...keys]>` - allows you to change the last access time of a key.
+  - `touch name` - will return 1, meaning the operation was successful.
+- `unlink <key or [...keys]>` - is like `del` but it works asynchronously and works on a separate thread, `del` is synchronous and blocks the current thread.
+  - `unlink name` - will return `1` if deleted successfully. `unlink` should be used over `del` when you have a lot of keys to delete for performance reason.
+- `type <key>` - tells you the type of value being stored for a key.
+- `type name` - will return the data type.
 ---
 
 ## Redis KEYS Command
 - In Redis if you use the KEYS command, you can return all the keys that match a pattern.
 - Supported glob-style patterns:
-  - `h?llo`, this matches hello, hallo and hxllo. `?` means any one character can be inserted there. The length of the key must be equal to `h?llo`
-  - `h*llo`, this matches hllo, heeeello. Any number of characters(even no character) can be placed between 'h' and 'llo'. The length of the key does not have to be equal to `h?llo`
-  - `h[ae]llo`, this matches hello and hallo, but not hillo. Either 'e' or 'a' can be inserted between 'h' and 'llo'.
-  - `h[^e]llo`, this matches hallo, hbllo but not hello. This means anything but 'e' can be inserted between 'h' and 'llo'.
-  - `h[a-b]llo`, this matches hallo and hbllo. This means any letters between 'a' and 'b' can be inserted between 'h' and 'llo'. 
+  - `h?llo`, this matches hello, hallo and hxllo. `?` means any one character can be inserted there. The length of the key must be equal to `h?llo`, length is 5.
+  - `h*llo`, this matches hllo, heeeello. Any number of characters(even no character) can be placed between 'h' and 'llo'. The length of the key can be greater or equal to `hllo`, the length is 4.
+  - `h[ae]llo`, this matches hello and hallo, but not hillo. Either 'e' or 'a' can be inserted between 'h' and 'llo'. The length of the key must be equal to `h[ae]llo`, length is 5.
+  - `h[^e]llo`, this matches hallo, hbllo but not hello. This means anything but 'e' can be inserted between 'h' and 'llo'. The length of the key must be equal to `h[^e]llo`, length is 5.
+  - `h[a-b]llo`, this matches hallo and hbllo. This means any letters between 'a' and 'b' can be inserted between 'h' and 'llo'. The length of the key must be equal to `h[a-b]llo`, length is 5.
 - `keys <pattern>`
   - Ex. `keys name?`
+  - Ex. `keys ?????` - will return any key that is 5 characters long.
   - Ex. `keys n*me`
   - Ex. `keys n[ae]me`
   - Ex. `keys *` - gets all the keys stored in our database.
+---
+
+## Redis Shutdown Command
+- Shutdowns down redis server.
+- `shutdown options[NOSAVE|SAVE]` - if you save your data will be stored on the disk if you choose not to save then it won't be saved onto the disk.
+- Ex. `shutdown save`
+- Ex. `shutdown nosave`
 ---
