@@ -44,7 +44,7 @@
 
 ## Redis Shutdown Command
 - Shutdowns down redis server.
-- `shutdown options[NOSAVE|SAVE]` - if you save your data will be stored on the disk if you choose not to save then it won't be saved onto the disk.
+- `shutdown options[NOSAVE|SAVE]` - if you save, your data will be stored on the disk if you choose not to save then it won't be saved onto the disk.
 - Ex. `shutdown save`
 - Ex. `shutdown nosave`
 ---

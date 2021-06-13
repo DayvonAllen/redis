@@ -1,4 +1,4 @@
-## String Datatype And Commands
+## String Data Type And Commands
 - `append <key> <value>` - will append to the end of the string
   - Ex. `append name hello` - will append and return the new length of the string.
 - `incr <key>` - increments the key's value by 1 of the value can be represented as an integer.
