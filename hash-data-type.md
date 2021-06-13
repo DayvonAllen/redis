@@ -1,7 +1,7 @@
 ## Redis Hashes
 - Redis Hashes are maps between string fields and string values.
 - They are good for representing objects.
-- Every hash can store up to 4 billion(2^32) field and value pairs.
+- Every hash can store up to 4 billion(2^32 - 1) field and value pairs.
 ---
 
 ## Hash Commands

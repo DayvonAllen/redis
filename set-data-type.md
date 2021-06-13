@@ -1,0 +1,33 @@
+## Sets
+- Redis Sets are an unordered collection of Strings.
+- It's possible to add, remove and test for the existence of members and all of this is done O(1) time complexity.
+- The max number of members in a set is 4 billion(2^32 - 1)
+- Difference of sets:
+  - The difference of two sets, ([a set], [b set]) is the set of all elements of 'a set' that are not elements of 'b set'
+    - Ex. `a set = [1, 2, 3]`, `b set = [3, 4, 5]`. The difference is `a set - b set = [1, 2]`. 1 and 2 are not in B set so that's the answer.
+  - The intersection of sets:
+    - Intersection of two set, ([a set], [b set]) is the set of elements that both 'a set' and 'b set' have in common.
+        - Ex. `a set = [1, 2, 3]`, `b set = [3, 4, 5]`. The intersection is `a set (intersection symbol) b set = [3]`. 3 is the only number shared by both sets.
+  - The union of sets:
+    - The union of two sets, ([a set], [b set]) is the set of elements which are in 'a set' or in 'b set' or in both sets.
+        - Ex. `a set = [1, 2, 3]`, `b set = [3, 4, 5]`. The union is `a set (union symbol) b set = [1, 2, 3, 4, 5]`. It combines all the numbers in both sets into a new set but does not duplicate common numbers.
+---
+
+## Set Commands
+- `sadd <key> [member...]` - create a set and add members.
+  - Ex. `sadd names dan nicky`
+- `smembers <key>` - gets all the members of a set.
+- `sismember <key> <member>` - check whether a member exists in the set. Returns 0 if not found and 1 if found.
+- `scard <key>` - You can find the cardinality in your set which is the total number of elements in the set.
+- `smove <source> <destination> <member>` - can move a member of the set to another set.
+- `spop key <count>` - can remove and return a number of random elements from your set.
+- `srem <key> [member...]` - you can remove one or multiple elements from your set.
+- `sdiff <key> [key...]` - returns the difference of sets. `<key> - <key1>`
+- `sdiffstore <destination> [key...]` - stores the result of `sdiff` into another key(destination)
+- `sinter <key> [key...]` - returns the intersection of sets.
+- `sinterstore <destination> [key...]` - stores the result of `sinter` into another key(destination).
+- `sunion <key> [key...]` - returns the union of sets
+- `sunionstore <destination> [key...]` - stores the result of `sunion` into another key(destination).
+- `srandmember <key> <count, optional>` - get a random number of elements from your set.
+- `del <key>` - deletes the set.
+---
