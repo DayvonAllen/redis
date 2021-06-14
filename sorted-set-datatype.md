@@ -1,0 +1,35 @@
+## Sorted Sets
+- Sorted sets are a data type which is similar to a mix between a Set and a Hash.
+- Sorted sets elements are ordered.
+- Every element in a sorted set is associated with a floating point value called a 'score'(this iw why the type is also similar to a hash, since every element is mapped to a value)
+---
+
+## Sorted Sets Commands
+- `zadd` - allows you to create a sorted set or add elements to an existing one.
+  - `zadd students 1 John 2 Bob`, The 1 and 2 are the scores.
+  - `zadd students nx 1 John 2 Bob`, 
+  - `zadd students xx 1 John 2 Bob`, 
+  - `zadd students ch 1 John 2 Bob`, - ch returns you how many elements changed in your set
+  - `zadd students incr 2 Bob`, - increments bob's score to 3.
+- `zrange` - print elements in sorted set
+  - `zrange students 0 -1`
+  - `zrange students 0 -1 withscores`
+- `zcard <key>` - checks the cardinality of a sorted set or the amount of elements it holds.
+- `zrem`
+- `zscore`
+- `zrevrange`
+- `zrank`
+- `zincrby`
+- `zcount`
+- `zpopmax`
+- `zpopmin`
+- `zinterstore`
+- `zunionstore`
+- `zrangebyscore`
+- `zrangebylex`
+- `zlexcount`
+- `zrevrangebylex`
+- `zremrangebylex`
+- `zremrangebyrank`
+- `zremrangebyscore`
+---
