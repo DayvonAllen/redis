@@ -43,4 +43,7 @@
 - `xgroup destroy <key> <group name>` - destroys a group.
 - `xreadgroup group <group name> <consumer name> count <number> block <milliseconds> streams <key> >` - allows you to read data from a group, creates a consumer. `>` means the message ID that is greater than all of the other message IDs(so start reading from the next message to be delivered). If you use `0` instead of `>`, the consumer will read all of the messages from the stream.
 - `xack <key> <group name> <message id>` - acknowledge that a message has been processed.
+- `xgroup setid <key> <consumer group name> <message ID>` - all consumers will begine to read from this message ID(useful for replaying messages).
+- `xgroup delconsumer <key> <consumer group name> <consumer>` - deletes a consumer.
+- `xpending <key> <consumer group name>` - shows you all unacknowledged messages.
 ---
