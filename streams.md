@@ -31,5 +31,16 @@
 - `exists <key>`
 - `xdel <key> <value>`
 - `xtrim maxlen <number> ` - trims numbers from your stream and deletes the rest. You can use `[~]` to tell redis to optimize for efficient memory management.
-- `xread <count> <Block ms> <streams> [key...] [id...]` - is a replacement for `xrange` but you can subscribe and get new items that arrive in the stream.
+- `xread <count> <Block ms> streams [key...] [id...]` - is a replacement for `xrange` but you can subscribe and get new items that arrive in the stream.
+  - `xread COUNT 3 STREAMS numbers 0-0` - It expects the last message ID as the final argument. Gets 3 elements from the stream.
+  - `xread COUNT 3 block 1000 streams numbers 0-0` - blocks for 1000 ms. If messages don't arrive in 1000 ms then the consumer will timeout
+  - `xread COUNT 3 block 1000 streams numbers $` - `$` means the last message ID. You should only use that dollar symbol once(according to the docs)
+- `xgroup create <key> <group name> <id(starting point of the stream)>` - create consumer group
+  - `xgroup create numbers group0 0` - creates a consumer group from ID 0(beginning of the stream)
+  - `xgroup create numbers group0 0 mkstream` - makes a stream if it doesn't exists.
+- `xinfo groups <key>` - get group info.
+- `xinfo consumers <key> <consumer name>` - get consumer info.
+- `xgroup destroy <key> <group name>` - destroys a group.
+- `xreadgroup group <group name> <consumer name> count <number> block <milliseconds> streams <key> >` - allows you to read data from a group, creates a consumer. `>` means the message ID that is greater than all of the other message IDs(so start reading from the next message to be delivered). If you use `0` instead of `>`, the consumer will read all of the messages from the stream.
+- `xack <key> <group name> <message id>` - acknowledge that a message has been processed.
 ---
