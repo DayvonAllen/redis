@@ -23,5 +23,5 @@
 - `geodist <key> <member1> <member2> <unit>` - returns the distance between the two members in the specified unit
   - `unit` = `mi` for miles, `km` for kilometers, `m` for meters , `ft` for feet.
 - `georadius`
-- `georadiusbymember <key> <member> <radius(m|ft|km|mi)> <withcoords(optional, returns coors)> <withdist(optional, returns distance)> <withhash(optional, returns hash)> <count(optional, returns count)> <ASC|DESC(optional)> <STORE key(optional)> <STOREDIST key(optional)>` - you can fetch members based on their radius
+- `georadiusbymember <key> <member> <radius(m|ft|km|mi)> <withcoords(optional, returns coors)> <withdist(optional, returns distance)> <withhash(optional, returns hash)> <count(optional, limits the results by the number specified here)> <ASC|DESC(optional)> <STORE key(optional, stores the output into a key)> <STOREDIST key(optional, stores the distance into a key)>` - you can fetch members based on their radius
   - `georadiusbymember mypoints "My Park" 10 mi withdist` - Gets every from my geospatial points where their lat and long show that they are 10 miles away from the lat and long of "My Park"(Which is the central point) and prints the distance between them.
